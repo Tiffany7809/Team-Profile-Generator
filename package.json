@@ -1,0 +1,28 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "A command line application that allows the user to create a HTML webpage with their teams information ",
+  "main": "Team.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tiffany7809/Team-Profile-Generator.git"
+  },
+  "keywords": [
+    "Teambuilder",
+    "TeamProfile",
+    "Generator",
+    "Team"
+  ],
+  "author": "Tiffany Dempsey",
+  "license": "MIT ",
+  "bugs": {
+    "url": "https://github.com/Tiffany7809/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/Tiffany7809/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.3"
+  }
+}
