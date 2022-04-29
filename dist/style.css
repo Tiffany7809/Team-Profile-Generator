@@ -6,3 +6,16 @@
     padding-top: 50px;
     font-size: x-large;
 }
+
+.card-title, .card-subtitle {
+  text-align: center;
+  
+}
+
+.card {
+    padding: 5px;
+    margin: 30px;
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: black;
+}
