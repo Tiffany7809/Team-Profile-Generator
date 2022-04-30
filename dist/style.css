@@ -4,12 +4,14 @@
     text-align: center;
     color: white;
     font-size: 60px;
+    font-family: "Abril Fatface";
 }
 
 .card-header{
   text-align: center;
   background-color: rgb(138, 216, 115);
   color: black;
+  font-family: "Abril Fatface";
 }
 
 .card-title {

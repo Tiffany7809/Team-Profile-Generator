@@ -27,7 +27,7 @@
 
   This application will give employers and quick and simple way to organize their team in an easy to read format.
 
-  This application uses Node.js, Inquirer and jest. As well as HTML5, CSS and Bootstrap
+  This application uses Node.js, Inquirer and jest. As well as HTML5, CSS, Google Fonts and Bootstrap
 
   
   ***
