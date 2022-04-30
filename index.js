@@ -7,10 +7,6 @@ const Manager = require("./lib/Manager");
 //waiting for new team members to be added to array
 const employees = [];
 
-function initApp() {
-    startHtml();
-    addTeamMember();
-}
 
 //promt questions to get all employees information
 function addTeamMember() {
@@ -44,8 +40,10 @@ function addTeamMember() {
         let roleInfo = "";
         if (teamRole === "Engineer") {
             roleInfo = "GitHub username";
+
         } else if (teamRole === "Intern") {
             roleInfo = "school name";
+            
         } else {
             roleInfo = "office phone number";
         }
@@ -85,7 +83,7 @@ function addTeamMember() {
                 if (addToTeam === "yes") {
                     addTeamMember();
                 } else {
-                    finishHtml();
+                    Htmlclose();
                 }
             });
             
@@ -95,8 +93,8 @@ function addTeamMember() {
 
 
 // function to generate the html file needed for web page
-function startHtml() {
-    const html = 
+function Html() {
+    const htmlTop = 
     `<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -107,41 +105,50 @@ function startHtml() {
             <title>Team Home Page</title>
         </head>
         <body>
-        <div class="container-fluid" id = "banner"> Team Home Page </div>
+        <div class="container-fluid" id = "banner"> My Team Profile</div>
             <div class="container">
                 <div class="row">`;
+
     // creating the page.html file for the team profile page
-    fs.writeFile("./dist/page.html", html, function(err) {
+    fs.writeFile("./dist/page.html", htmlTop, function(err) {
         if (err) {
             console.log(err);
         }
     });
 }
 
-function addToHtml(member) {
-    return new Promise(function(resolve, reject) {
-        const name = member.getName();
-        const role = member.getRole();
-        const id = member.getId();
-        const email = member.getEmail();
+//funtion to create page with all employee information once entered
+function TeamApp() {
+    Html();
+    addTeamMember();
+}
 
-        let data = "";
+function addToHtml(teamMember) {
+    return new Promise(function(resolve, reject) {
+
+        const email = teamMember.getEmail();
+        const name = teamMember.getName();
+        const id = teamMember.getId();
+        const role = teamMember.getRole();
+       
+
+        let memberCard = "";
 
         //if employee entered is engineer, append this card
-
-        //change card styles 
         if (role === "Engineer") {
-            const gitHub = member.getGithub();
-            data = 
+            const gitHub = teamMember.getGithub();
+            memberCard = 
                 `<div class="col-6">
                     <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">${name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
+                        <h5 class="card-header">${name}</h5>
+                        <h6 class="card-title mb-2 text-muted">Engineer</h6>
                         <p class="card-text">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">ID: ${id}</li>
-                                <li class="list-group-item">GitHub: ${gitHub}</li>
+                                <li class="list-group-item"> 
+                                   GitHub: <a href ="github.com/${gitHub}"> ${gitHub} </a>
+                                </li>
                             </ul>
                         </p>
                         <a href="mailto:${email}" class="card-link">${email}</a>
@@ -151,14 +158,14 @@ function addToHtml(member) {
 
         //if employee entered is an intern, appened this card
         } else if (role === "Intern") {
-            const school = member.getSchool();
+            const school = teamMember.getSchool();
            
-            data = 
+            memberCard = 
                 `<div class="col-6">
                     <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">${name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
+                        <h5 class="card-header">${name}</h5>
+                        <h6 class="card-title mb-2 text-muted">Intern</h6>
                         <p class="card-text">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">ID: ${id}</li>
@@ -172,13 +179,13 @@ function addToHtml(member) {
         
         //if employee is a manager, appened this card
         } else {
-            const officePhone = member.getOfficeNum();
-            data = 
+            const officePhone = teamMember.getOfficeNum();
+            memberCard = 
                 `<div class="col-6">
                     <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">${name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
+                        <h5 class="card-header">${name}</h5>
+                        <h6 class="card-title mb-2 text-muted">Manager</h6>
                         <p class="card-text">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">ID: ${id}</li>
@@ -190,39 +197,33 @@ function addToHtml(member) {
                     </div>
                 </div>`;
         }
-        console.log("adding this member to your team!");
+        console.log("Team Member has been added!");
 
         //appending the added employess to the html page
-        fs.appendFile("./dist/page.html", data, function (err) {
+        fs.appendFile("./dist/page.html", memberCard, function (err) {
             if (err) {
                 return reject(err);
             };
             return resolve();
         });
-    });
-    
-            
-    
-        
-    
-    
+    });  
 }
 
 //function to close out the html file once all employees have been added to page.
-function finishHtml() {
-    const html = ` 
+function Htmlclose() {
+    const htmlEnd = ` 
     </div> 
     </div>
     
     </body>
     </html>`;
 
-    fs.appendFile("./dist/page.html", html, function (err) {
+    fs.appendFile("./dist/page.html", htmlEnd, function (err) {
         if (err) {
             console.log(err);
         };
     });
-    console.log("end");
+    console.log("Thank you! Your Teams Profile Page has been created!");
 }
 
-initApp();
+TeamApp();
