@@ -1,11 +1,12 @@
-const inquirer = require("inquirer");
+
 const fs = require("fs");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const inquirer = require("inquirer");
 
 //waiting for new team members to be added to array
-const employees = [];
+const team = [];
 
 
 //promt questions to get all employees information
@@ -13,7 +14,7 @@ function addTeamMember() {
     inquirer.prompt([
     {
         type: "input",
-        message: "Please enter your Team members name:",
+        message: "Please enter the team members name:",
         name: "userName"
     },
     {
@@ -38,16 +39,21 @@ function addTeamMember() {
     }])
     .then(function({userName, teamRole, id, email}) {
         let roleInfo = "";
-        if (teamRole === "Engineer") {
-            roleInfo = "GitHub username";
+
+        if (teamRole === "Manager") {
+            roleInfo = "office phone number";
+        
 
         } else if (teamRole === "Intern") {
             roleInfo = "school name";
             
         } else {
-            roleInfo = "office phone number";
+            roleInfo = "GitHub username";
         }
-        inquirer.prompt([{
+
+        inquirer.prompt([
+        {
+            type: "input",
             message: `Enter team member's ${roleInfo}`,
             name: "roleInfo"
         },
@@ -60,22 +66,25 @@ function addTeamMember() {
             ],
             name: "addToTeam"
         }])
+
         .then(function({roleInfo, addToTeam}) {
             let newMember;
-            //if new member is an engineer...
-            if (teamRole === "Engineer") {
-                newMember = new Engineer(userName, id, email, roleInfo);
+            
+            //if new member is a Manager...
+            if (teamRole === "Manager") {
+                newMember = new Manager(userName, id, email, roleInfo);
 
             //if new member is an Intern...
             } else if (teamRole === "Intern") {
                 newMember = new Intern(userName, id, email, roleInfo);
 
-            //if new member is a manager...
+            //if new member is an Engineer...
             } else {
-                newMember = new Manager(userName, id, email, roleInfo);
+                newMember = new Engineer(userName, id, email, roleInfo);
             }
             // pushes last added team emember to the employees array 
-            employees.push(newMember);
+            team.push(newMember);
+
             addToHtml(newMember)
 
             //asking the user if they would liek to add another team member
@@ -147,7 +156,7 @@ function addToHtml(teamMember) {
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">ID: ${id}</li>
                                 <li class="list-group-item"> 
-                                   GitHub: <a href ="github.com/${gitHub}"> ${gitHub} </a>
+                                   GitHub: <a href ="github.com/${gitHub}"target="_blank"> ${gitHub} </a>
                                 </li>
                             </ul>
                         </p>
