@@ -65,6 +65,9 @@
   I have used jest to write tests for this code.
   To test that this application is working correctly, make sure you have installed jest.
   In the Terminal, run "npm test".
+  
+  This video will show how to run the tests and what the output should be if all is working correctly:
+  https://drive.google.com/file/d/19u_eg113W3skBLUlU8odn4XZ8Em4rjM8/view
 
   ***
 
