@@ -49,6 +49,9 @@
   Once you have completed the questions, you can close the command line.
   Go into the dist folder, and your team profile html document will be labled "page.html"
   open this page in your preferred browser to view you new team profile page.
+  
+  This video shows how to ue the app:
+  https://drive.google.com/file/d/1cyfU_AMh1fn3FfHc57h-V_JWa7JBz2-B/view
 
   
   ***
